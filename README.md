@@ -1,3 +1,5 @@
+![alt text](https://github.com/xubair305/fake-call-logs/blob/master/images/app_icon.png)
+
 # fake_call_log
 
 A new Flutter project.
