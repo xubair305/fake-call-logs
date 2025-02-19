@@ -19,7 +19,9 @@ A Flutter application that allows users to create and manage fake call logs. Thi
 ---
 
 ## 📸 Screenshots  
-*(Add images here once your app UI is ready!)*  
+
+<img src="https://github.com/xubair305/fake-call-logs/blob/master/images/SS01.jpg">
+<img src="https://github.com/xubair305/fake-call-logs/blob/master/images/SS02.jpg">
 
 ---
 
