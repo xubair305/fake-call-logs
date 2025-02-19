@@ -1,4 +1,4 @@
-<img src="[https://i.imgur.com/ZWnhY9T.png](https://github.com/xubair305/fake-call-logs/blob/master/images/app_icon.png)" width="150" height="150">
+<img src="https://github.com/xubair305/fake-call-logs/blob/master/images/app_icon.png" width="150" height="150">
 # fake_call_log
 
 A new Flutter project.
