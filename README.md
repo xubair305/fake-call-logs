@@ -27,7 +27,7 @@ A Flutter application that allows users to create and manage fake call logs. Thi
 
 1️⃣ Clone the repository:  
 ```sh
-git clone https://github.com/yourusername/fake_call_log.git
+git clone https://github.com/xubair305/fake-call-logs.git
 cd fake_call_log
 ```
 2️⃣ Install dependencies:
@@ -38,31 +38,31 @@ flutter pub get
 ```sh
 flutter run
 ```
-🛠️ Technologies Used
-	•	Flutter (State Management: GetX) v-3.29.0
-	•	Dart
-	•	Get Storage for local storage
-	•	flutter_contact for contact picking
-	•	intl for date formatting
-	•	CallLog API for real-time call log updates
+🛠️ Technologies Used <br />
+	•	Flutter (State Management: GetX) v-3.29.0<br />
+	•	Dart<br />
+	•	Get Storage for local storage<br />
+	•	flutter_contact for contact picking<br />
+	•	intl for date formatting<br />
+	•	CallLog API for real-time call log updates<br />
 
- 📌 How to Use
-1️⃣ Open the app and navigate to the Fake Call Log Creator.
-2️⃣ Enter a phone number manually or pick a contact from your device.
-3️⃣ Select Call Type – Incoming, Outgoing, Missed, or Rejected.
-4️⃣ Set Call Duration – Choose how long the call lasted.
-5️⃣ Pick Date & Time – Select when the call happened.
-6️⃣ Press ‘Add Call’ – The fake call log will be added to the history.
-7️⃣ View & Manage Logs – Check your fake call logs in the history screen.
+ 📌 How to Use<br />
+1️⃣ Open the app and navigate to the Fake Call Log Creator.<br />
+2️⃣ Enter a phone number manually or pick a contact from your device.<br />
+3️⃣ Select Call Type – Incoming, Outgoing, Missed, or Rejected.<br />
+4️⃣ Set Call Duration – Choose how long the call lasted.<br />
+5️⃣ Pick Date & Time – Select when the call happened.<br />
+6️⃣ Press ‘Add Call’ – The fake call log will be added to the history.<br />
+7️⃣ View & Manage Logs – Check your fake call logs in the history screen.<br />
 
-💡 Contributing
-Feel free to submit issues or pull requests to improve the app. Let’s build together! 🚀
+💡 Contributing<br />
+Feel free to submit issues or pull requests to improve the app. Let’s build together! 🚀<br />
 
-🔗 Connect with Me
+🔗 Connect with Me<br />
 
-📧 Email: xubairansari305@email.com
-🐦 Twitter: @JubairAnsari305
-📷 Instagram: @_the_jay
-👨‍💻 GitHub: xubair305
+📧 Email: xubairansari305@email.com<br />
+🐦 Twitter: @JubairAnsari305<br />
+📷 Instagram: @_the_jay<br />
+👨‍💻 GitHub: xubair305<br />
 
 Made with ❤️ in Flutter. 🚀
