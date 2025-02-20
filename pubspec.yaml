@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   # call_log: ^4.0.0
   get: ^4.7.2
-  call_e_log: ^0.0.4
+  # call_e_log: ^0.0.4
   permission_handler: ^11.3.1
   flutter_contacts: ^1.1.9+2
   intl: ^0.20.2

@@ -1,5 +1,6 @@
 import 'dart:developer' show log;
 
+import 'package:fake_call_log/app/services/call_log_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
@@ -18,11 +19,11 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    requestCallLogPermission();
+    _requestCallLogPermission();
     super.onInit();
   }
 
-  final _platform = MethodChannel('fake_call_log');
+  // final _platform = MethodChannel('fake_call_log');
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -55,13 +56,13 @@ class HomeController extends GetxController {
     """);
 
     try {
-      final bool success = await _platform.invokeMethod('addFakeCallLog', {
-        "number": phoneController.text, // Fake number
-        "name": contactName,
-        "type": callType, // Incoming (1), Outgoing (2), Missed (3)
-        "duration": durationInSeconds, // Call duration in seconds
-        "timestamp": selectedDateTime.millisecondsSinceEpoch,
-      });
+      final success = await CallLogService.addCallLog(
+        phoneNumber: phoneController.text,
+        contactName: contactName,
+        callType: callType,
+        duration: durationInSeconds,
+        timestamp: selectedDateTime.millisecondsSinceEpoch,
+      );
 
       if (success) {
         Get.snackbar('Success', 'Fake Call Log Added', snackPosition: SnackPosition.BOTTOM);
@@ -74,8 +75,10 @@ class HomeController extends GetxController {
     }
   }
 
-  void requestCallLogPermission() async {
-    Map<Permission, PermissionStatus> statuses = await [Permission.phone, Permission.contacts].request();
+  Future<bool> _requestCallLogPermission() async {
+    final statuses = await [Permission.phone, Permission.contacts].request();
+    return statuses[Permission.phone] == PermissionStatus.granted &&
+        statuses[Permission.contacts] == PermissionStatus.granted;
   }
 
   void getContactList() async {

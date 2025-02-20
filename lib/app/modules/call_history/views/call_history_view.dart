@@ -1,6 +1,6 @@
-import 'package:call_e_log/call_log.dart';
 import 'package:fake_call_log/app/helper/app_datetime_formatter.dart';
 import 'package:fake_call_log/app/routes/app_pages.dart';
+import 'package:fake_call_log/app/services/call_log_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -17,17 +17,13 @@ class CallHistoryView extends GetView<CallHistoryController> {
         title: Text('Phone', style: TextStyle(color: context.theme.primaryColor, fontWeight: FontWeight.w700)),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           Get.toNamed(Routes.HOME);
         },
         foregroundColor: context.theme.primaryColor,
         child: Icon(Icons.add),
       ),
       body: Obx(() {
-        if (controller.callHistory.isEmpty) {
-          return const Center(child: Text("No call history found!"));
-        }
-
         if (controller.rxStatus.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -36,45 +32,46 @@ class CallHistoryView extends GetView<CallHistoryController> {
           return Center(child: Text(controller.rxStatus.errorMessage ?? '', style: const TextStyle(color: Colors.red)));
         }
 
-        if (controller.callHistory.isEmpty) {
-          return const Center(child: Text("No call history found!"));
-        }
+        return controller.callHistory.isEmpty
+            ? Center(child: Text("No call history found!"))
+            : GroupedListView<CallLogModel, DateTime>(
+              elements: controller.callHistory.toList(),
+              groupBy: (element) => AppDatetimeFormatter.dateTimeFromInt(element.timestamp),
+              groupSeparatorBuilder:
+                  (groupByValue) => Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+                    child: Text(
+                      AppDatetimeFormatter.formatDateTime(groupByValue),
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
 
-        return GroupedListView<CallLogEntry, DateTime>(
-          elements: controller.callHistory.toList(),
-          groupBy: (element) => AppDatetimeFormatter.dateTimeFromInt(element.timestamp),
-          groupSeparatorBuilder:
-              (groupByValue) => Padding(
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
-                child: Text(
-                  AppDatetimeFormatter.formatDateTime(groupByValue),
-                  style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-              ),
-
-          useStickyGroupSeparators: false,
-          floatingHeader: true,
-          groupItemBuilder: (context, element, groupStart, groupEnd) {
-            return Container(
-              margin: EdgeInsets.symmetric(horizontal: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(groupEnd ? 16 : 0),
-                  top: Radius.circular(groupStart ? 16 : 0),
-                ),
-                color: Colors.white,
-              ),
-              child: ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                title: Text(element.name ?? 'Unknown'),
-                subtitle: Text(element.number ?? ''),
-                leading: getCallIcon(element.callType),
-                trailing: Text(AppDatetimeFormatter.formatIntoAmPm(element.timestamp)),
-              ),
+              useStickyGroupSeparators: false,
+              floatingHeader: true,
+              groupItemBuilder: (context, element, groupStart, groupEnd) {
+                return Container(
+                  margin: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(groupEnd ? 16 : 0),
+                      top: Radius.circular(groupStart ? 16 : 0),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                    title: Text(
+                      element.name,
+                      style: TextStyle(fontWeight: element.isRead == 1 ? FontWeight.bold : null),
+                    ),
+                    subtitle: Text(element.number),
+                    leading: getCallIcon(element.callType),
+                    trailing: Text(AppDatetimeFormatter.formatIntoAmPm(element.timestamp)),
+                  ),
+                );
+              },
+              order: GroupedListOrder.DESC,
             );
-          },
-          order: GroupedListOrder.DESC,
-        );
       }),
     );
   }
